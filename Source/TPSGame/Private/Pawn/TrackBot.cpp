@@ -68,6 +68,10 @@ FVector ATrackBot::GetNextPathPoint()
 {
 	ACharacter * MyPlayer = UGameplayStatics::GetPlayerCharacter(this, 0);
 	UNavigationPath * NavPath = UNavigationSystemV1::FindPathToActorSynchronously(this, GetActorLocation(), MyPlayer);
+	if (NavPath == nullptr)
+	{
+		return GetActorLocation();
+	}
 	if (NavPath->PathPoints.Num() > 1)
 	{
 		return NavPath->PathPoints[1];
